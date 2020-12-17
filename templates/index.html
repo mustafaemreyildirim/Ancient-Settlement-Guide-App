@@ -13,12 +13,12 @@ Registration
             
 
             {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
-            
+            {{dField(form.name, 'Name', autocomplete=true, autofocus=true) }}
+            {{dField(form.surname, 'Surname', autocomplete=true, autofocus=true) }}
+            {{dField(form.email, 'Email' )}}
             {{dField(form.password, 'Password' )}}
-
             {{dField(form.confirm_pwd, 'Confirm password' )}}
-            
-            
+
             <div>
                 {{ form.submit_button}}
 
@@ -26,4 +26,5 @@ Registration
             {{form.csrf_token}}
         </form>
     </div>
-</section>{% endblock %}
+</section>
+{% endblock %}
