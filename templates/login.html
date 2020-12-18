@@ -1,0 +1,26 @@
+{% from 'form_helper.html' import dField %}
+{% extends "prelogin_temp.html" %}
+
+{% block title %}Login {% endblock %}
+
+{% block body %}
+<section class="hero is-primary">
+    <div class="hero-body">
+        <h2>Login now!</h2>
+        <p>Enter your username/password to get into the system.</p>
+
+        <form action="{{ url_for('login')}}", method='POST' novalidate>
+                
+
+            {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
+            {{dField(form.password, 'Password' )}}
+
+            <div>
+                {{ form.submit_button}}
+
+            </div>
+            {{form.csrf_token}}
+        </form>
+    </div>
+</section>
+{% endblock %}

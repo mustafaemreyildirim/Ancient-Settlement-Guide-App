@@ -1,7 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from flask.helpers import url_for
 from wtform import *
 from models import *
 from datetime import datetime, timedelta
+from passlib.hash import pbkdf2_sha256
 
 
 app = Flask(__name__)
@@ -14,30 +16,38 @@ db = SQLAlchemy(app)
 def index():
 
     reg_form = RegForm()
+    
+    #registration is successful and route the user into login page
     if reg_form.validate_on_submit():
         username = reg_form.username.data
         name = reg_form.name.data
         surname = reg_form.surname.data
         email = reg_form.email.data
         password = reg_form.password.data
+
+        hashed_pw = pbkdf2_sha256.hash(password)
+
         createdate = datetime.now()
+ 
 
-
-        usern_ob = User.query.filter_by(username=username).first()
-        usere_ob = User.query.filter_by(email=email).first()
-
-        if usere_ob :
-            return "This email is being used. "
-        
-        elif usern_ob :
-            return "This username is being used. " 
-
-        user = User(username=username, password=password, name=name, surname=surname,email=email,createdate=createdate)
+        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
         db.session.add(user)
         db.session.commit()
-        return "user is added into db!"
+        return redirect(url_for('login'))
 
     return render_template("index.html",form=reg_form)
+
+
+@app.route("/login",methods=["GET", "POST"])
+def login():
+
+    login_form = LogForm()
+
+    if login_form.validate_on_submit():
+        return "Log into the system."
+    
+    return render_template("login.html", form=login_form)
+
 
 if __name__=="__main__":
     app.run(debug=True)
