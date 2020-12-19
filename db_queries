@@ -1,0 +1,66 @@
+CREATE TABLE "contributor" (
+	contid serial PRIMARY KEY,
+	username VARCHAR ( 50 ) UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+	email VARCHAR ( 255 ) UNIQUE NOT NULL,
+	createdate TIMESTAMP NOT NULL,
+    name VARCHAR ( 100 ) NOT NULL,
+	surname VARCHAR ( 100 ) NOT NULL,
+	university	VARCHAR ( 100 ) NOT NULL,
+	researcharea VARCHAR ( 100 ) 
+ 
+);
+
+CREATE TABLE "location" (
+	locationid serial PRIMARY KEY,
+	location	VARCHAR ( 100 ) UNIQUE NOT NULL,
+	region	VARCHAR ( 100 ) 
+);
+
+INSERT INTO "location"(location,region)
+VALUES('çorum', "iç anadolu");
+
+
+CREATE TABLE "civilization" (
+	civid           		serial PRIMARY KEY,
+	civilizationname 	VARCHAR ( 50 ) UNIQUE NOT NULL,
+	goldenage	    		VARCHAR ( 50 ) ,
+	knownperson	     	VARCHAR ( 100 )
+);
+
+INSERT INTO "civilization"(civilizationname,goldenage,knownperson)
+VALUES('hitit', 'geç bronz', 'hattuşili');
+
+
+CREATE TABLE "paths" (
+  	pathid serial PRIMARY KEY,
+  	pathname VARCHAR ( 50 ) UNIQUE NOT NULL,
+    artifacts VARCHAR ( 50 ),
+    location	VARCHAR ( 100 ) UNIQUE NOT NULL  REFERENCES "location" (location),
+    civilizationname	VARCHAR ( 100 ) UNIQUE NOT NULL  REFERENCES "civilization" (civilizationname)
+
+);
+
+CREATE TABLE "ancientsettlement" (
+	setid serial PRIMARY KEY,
+  	cityname VARCHAR ( 50 ) UNIQUE NOT NULL,
+	location VARCHAR ( 100 ) UNIQUE NOT NULL  REFERENCES "location" (location),
+    civilizationname VARCHAR ( 100 ) UNIQUE NOT NULL  REFERENCES "civilization" (civilizationname)
+
+);
+
+CREATE TABLE "votes" (
+	votesid serial PRIMARY KEY,
+  	cityname VARCHAR ( 50 ) UNIQUE NOT NULL REFERENCES "ancientsettlement" (cityname)
+	votescount INT UNIQUE NOT NULL,
+);
+
+
+ALTER TABLE "contributor" 
+ADD COLUMN contid SERIAL NOT NULL REFERENCES "contributor" (contid)
+
+INSERT INTO "contributor" (username,password,email,createdate,name,surname,university,researcharea)
+VALUES('memre','1234','matoemrme@gmail.com','2020-12-19 02:18:40.179925', 'memre',  'yıldırım',  'itü','deep learning');
+
+INSERT INTO "ancientsettlement"(cityname,location,civilizationname,contid )
+VALUES('hattuşa','çorum','hitit',1);

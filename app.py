@@ -1,4 +1,3 @@
-import re
 from flask import Flask, render_template, redirect
 from flask.globals import current_app
 from flask.helpers import url_for
@@ -71,7 +70,10 @@ def cities():
 def logout():
 
     logout_user()
-    return "Logged out!"
+    return redirect(url_for('/'))
 
 if __name__=="__main__":
     app.run(debug=True)
+
+
+

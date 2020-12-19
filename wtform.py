@@ -1,4 +1,5 @@
 from flask_wtf import  FlaskForm
+from markupsafe import Markup
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired,  Length, EqualTo, Email, ValidationError
 from models import User
@@ -62,7 +63,7 @@ class LogForm(FlaskForm):
     
     password = PasswordField('password_label',validators=[InputRequired(message="You need to enter a password.")])
 
-    submit_button = SubmitField('Login')
+    submit_button = SubmitField('Giriş')
     
     
     #validate_ func automaticly invoked.    
