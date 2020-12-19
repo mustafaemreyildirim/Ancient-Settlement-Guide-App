@@ -1,9 +1,9 @@
-from enum import unique
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """User Model"""
 
     __tablename__ = "user"
@@ -16,5 +16,9 @@ class User(db.Model):
     name = db.Column(db.String(100), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
 
-
+    # define this func to override predefined get_id()
+    # because it looks for "id", in db this column is called
+    # as "userid". Hence it is implemented. 
+    def get_id(self):
+        return (self.userid)
 
