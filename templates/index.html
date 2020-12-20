@@ -1,32 +1,70 @@
 {% from 'form_helper.html' import dField %}
 
-{% extends "prelogin_temp.html" %}
+{% extends "home.html" %}
 
 {% block title %}
 Registration
 {% endblock %}
 
+
 {% block body %}
-<section class="hero is-primary">
-    <div class="hero-body">
-        <form action="{{ url_for('index')}}", method='POST' novalidate>
-            
 
-            {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
-            {{dField(form.name, 'Name', autocomplete=true, autofocus=true) }}
-            {{dField(form.surname, 'Surname', autocomplete=true, autofocus=true) }}
-            {{dField(form.email, 'Email' )}}
-            {{dField(form.password, 'Password' )}}
-            {{dField(form.confirm_pwd, 'Confirm password' )}}
+<body style="background-image: url({{ url_for('static', filename='img/myra.jpg') }}); background-size: 100% 100%;">
+    {% endblock %}
 
-            <div>
-                {{ form.submit_button}}
+    {% block welcome %}
+    REGISTER 
+    <br style="line-height: 10px;"> 
+    {% endblock %}
 
-            </div>
-            {{form.csrf_token}}
-        </form>
-    </div>
-</section>
-{% endblock %}
+    {% block box %}
+    <div>
+        <div class="column is-4 is-offset-4">
+            <div class="box" style="padding:10px;
+                    position:center;
+                    width: 800px;
+                    background: rgb(204, 204, 204); 
+                    background: rgba(204, 204, 204, 0.6) ">
+    {% endblock %}
+
+    {% block form %}
+                <form action="{{ url_for('index')}}" , method='POST' novalidate>
+                    <div>
+                        <div style="width: 48%; float:left">
+                            {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
+                            <div style="line-height:40%;">
+                                <br>
+                            </div>
+                            {{dField(form.name, 'Name', autocomplete=true, autofocus=true) }}
+                            <div style="line-height:40%;">
+                                <br>
+                            </div>
+                            {{dField(form.surname, 'Surname', autocomplete=true, autofocus=true) }}
+                        </div>
+
+                        <div style="width: 48%; float:right">
+                            {{dField(form.email, 'Email' )}}
+                            <div style="line-height:40%;">
+                                <br>
+                            </div>
+                            {{dField(form.password, 'Password' )}}
+                            <div style="line-height:40%;">
+                                <br>
+                            </div>
+                            {{dField(form.confirm_pwd, 'Confirm password' )}}
+                            <br>
+                        </div>
 
 
+
+                        {{ form.submit_button}}
+                        <center>
+                            <a href="/login">Have an Account? Sign In</a>
+
+                        </center>
+
+                    </div>
+                    {{form.csrf_token}}
+
+                </form>
+    {% endblock %}

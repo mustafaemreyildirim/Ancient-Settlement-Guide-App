@@ -51,8 +51,7 @@ def login():
     login_form = LogForm()
 
     if login_form.validate_on_submit():
-        user_object = User.query.filter_by(username=login_form.username.data).first()
-        login_user(user_object)
+       
 
         return redirect(url_for('cities'))
     
