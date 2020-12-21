@@ -19,7 +19,12 @@ login.init_app(app)
 def load_user(userid):
     return User.query.get(int(userid))
 
+
 @app.route("/",methods=["GET", "POST"])
+def home():
+    return render_template("first.html")
+
+@app.route("/register",methods=["GET", "POST"])
 def index():
 
     reg_form = RegForm()

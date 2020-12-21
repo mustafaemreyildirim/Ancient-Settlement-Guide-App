@@ -82,5 +82,5 @@ class LogForm(FlaskForm):
             raise ValidationError("Username or password is incorrect ")
     
         if not pbkdf2_sha256.verify(field.data,usern_ob.password):
-            raise ValidationError("Username or password is incorrectcdc")
+            raise ValidationError("Username or password is incorrect")
      

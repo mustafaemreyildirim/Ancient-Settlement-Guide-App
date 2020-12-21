@@ -64,3 +64,40 @@ VALUES('memre','1234','matoemrme@gmail.com','2020-12-19 02:18:40.179925', 'memre
 
 INSERT INTO "ancientsettlement"(cityname,location,civilizationname,contid )
 VALUES('hattuşa','çorum','hitit',1);
+
+ALTER TABLE "votes"
+DROP COLUMN cityname
+
+ALTER TABLE "votes" 
+ADD COLUMN setid SERIAL NOT NULL REFERENCES "ancientsettlement" (setid);
+
+
+ALTER TABLE "ancientsettlement"
+DROP COLUMN civilizationname
+
+ALTER TABLE "ancientsettlement" 
+ADD COLUMN civid SERIAL NOT NULL REFERENCES "civilization" (civid);
+
+
+ALTER TABLE "paths"
+DROP COLUMN civilizationname;
+
+ALTER TABLE "paths"
+DROP COLUMN location;
+
+ALTER TABLE "paths" 
+ADD COLUMN civid SERIAL NOT NULL REFERENCES "civilization" (civid);
+
+ALTER TABLE "paths" 
+ADD COLUMN locationid SERIAL NOT NULL REFERENCES "location" (locationid);
+
+CREATE TABLE "searched" (
+	searchedid serial PRIMARY KEY,
+	artifacts VARCHAR (100 ) NOT N,
+	civid  SERIAL NOT NULL REFERENCES "ancientsettlement"(civid)) ;
+
+CREATE TABLE "region" (
+	regionid serial PRIMARY KEY,
+	region VARCHAR ( 100 ) NOT NULL
+	) ;
+	
