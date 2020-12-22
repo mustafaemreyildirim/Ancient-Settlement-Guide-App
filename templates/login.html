@@ -13,6 +13,38 @@ LOGIN
 
 {% endblock %}
 
+{% block navbar %}
+<nav class="navbar navbar-transparent" style="background-color:rgb(145, 199, 243); height: 50px;">    
+    <div class="container">
+    <div class="navbar-brand">
+        <a class="navbar-item-logo" href="/" > </a>
+        
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+
+            <a class="navbar-item-login" href="/register" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+                HELP
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="navbar-item-login" href="/register" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+                REGISTER
+            </a>
+
+        </div>
+    </div>
+</div>
+</nav>
+
+<style>
+.navbar-item-logo{
+background: url(https://www.flaticon.com/svg/static/icons/svg/3655/3655576.svg) no-repeat center center;
+background-size: cover;
+width: 60px}
+
+</style>
+
+{% endblock %}
+
 {% block box %}
 <div class="container has-text-centered">
     <div class="column is-4 is-offset-4">
@@ -29,7 +61,7 @@ LOGIN
 
         {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
         <div style="line-height:40%;">
-            <br>
+            <br> 
         </div>
         {{dField(form.password, 'Password' )}}
 

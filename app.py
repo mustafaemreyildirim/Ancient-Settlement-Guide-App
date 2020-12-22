@@ -22,7 +22,7 @@ def load_user(userid):
 
 @app.route("/",methods=["GET", "POST"])
 def home():
-    return render_template("first.html")
+    return render_template("enterance.html")
 
 @app.route("/register",methods=["GET", "POST"])
 def index():
@@ -56,25 +56,28 @@ def login():
     login_form = LogForm()
 
     if login_form.validate_on_submit():
-       
-
-        return redirect(url_for('cities'))
+        user=User.query.filter_by(username=login_form.username.data).first()
+        login_user(user)
+        if current_user.is_authenticated:
+            return redirect(url_for('cities'))
     
     return render_template("login.html", form=login_form)
 
 @app.route("/cities",methods=["GET", "POST"])
+
 def cities():
 
     if not current_user.is_authenticated:
         return "Please log into application!"
     
-    return "List the ancient cities"
+
+    return render_template("first.html")
 
 @app.route("/logout",methods=["GET"])
 def logout():
 
     logout_user()
-    return redirect(url_for('/'))
+    return render_template("enterance.html")
 
 if __name__=="__main__":
     app.run(debug=True)
