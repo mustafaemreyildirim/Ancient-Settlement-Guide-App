@@ -1,7 +1,7 @@
 {% from 'form_helper.html' import dField %}
 {% extends "home.html" %}
 
-{% block title %}Login {% endblock %}
+{% block title %}Historai-Login {% endblock %}
 
 {% block body %}
 <body style="background-image: url({{ url_for('static', filename='img/ephesus.jpg') }}); background-size: 100% 100%;">
@@ -14,19 +14,21 @@ LOGIN
 {% endblock %}
 
 {% block navbar %}
-<nav class="navbar navbar-transparent" style="background-color:rgb(145, 199, 243); height: 50px;">    
+   <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.4); height: 50px;">    
     <div class="container">
     <div class="navbar-brand">
         <a class="navbar-item-logo" href="/" > </a>
         
     </div>
     <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-end">
+        <div class="navbar-end" style="font-family: Quicksand;">
 
-            <a class="navbar-item-login" href="/register" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+            <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
                 HELP
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="navbar-item-login" href="/" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                HOME
             </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a class="navbar-item-login" href="/register" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+            <a class="navbar-item-login" href="/register" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
                 REGISTER
             </a>
 
@@ -37,9 +39,12 @@ LOGIN
 
 <style>
 .navbar-item-logo{
-background: url(https://www.flaticon.com/svg/static/icons/svg/3655/3655576.svg) no-repeat center center;
-background-size: cover;
-width: 60px}
+background: url({{ url_for('static', filename='img/logoto.png') }}) no-repeat center center;
+position: relative;
+width: 280px;
+left: 15px;
+background-size: contain;
+}
 
 </style>
 
@@ -56,7 +61,7 @@ width: 60px}
 {% endblock %}
 
 {% block form %}
-<form action="{{ url_for('login')}}", method='POST' novalidate>
+<form action="{{ url_for('login')}}", method='POST' novalidate >
             
 
         {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
@@ -72,12 +77,12 @@ width: 60px}
             {{ form.submit_button}}
         </div>
         <p class="has-text-grey">
-            <center>
+             <center>
                 <div style="line-height:40%;">
                     <br>
-                </div>
+                </div style="font-family: Quicksand;">
                 <a href="/">Sign Up</a> &nbsp;·&nbsp; <a href="#">Forgot Password</a> &nbsp;·&nbsp;
-            </center>
+            </center> 
 
           </p>
         {{form.csrf_token}}

@@ -101,3 +101,20 @@ CREATE TABLE "region" (
 	region VARCHAR ( 100 ) NOT NULL
 	) ;
 	
+
+CREATE TABLE "famousperson" (
+	knownpersonid serial PRIMARY KEY,
+	knownperson VARCHAR ( 100 ) NOT NULL
+	) ;
+ALTER TABLE "location" 
+ADD COLUMN regionid SERIAL NOT NULL REFERENCES "region" (regionid);
+
+
+ALTER TABLE "civilization" 
+ADD COLUMN knownpersonid SERIAL NOT NULL REFERENCES "famousperson" (knownpersonid);
+
+ALTER TABLE "location"
+DROP COLUMN region;
+
+ALTER TABLE "civilization"
+DROP COLUMN knownperson;

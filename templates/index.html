@@ -3,7 +3,7 @@
 {% extends "home.html" %}
 
 {% block title %}
-Registration
+Historai-Registration
 {% endblock %}
 
 
@@ -18,22 +18,31 @@ Registration
     {% endblock %}
 
     {% block navbar %}
-    <nav class="navbar navbar-transparent" style="background-color:rgb(145, 199, 243); height: 50px;">    
+    <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.4); height: 50px;">    
         <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item-logo" href="/" > </a>
             
         </div>
         <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end">
+            <div class="navbar-end" style="font-family: Quicksand;">
     
-                <a class="navbar-item-login" href="/help" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+                <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
                     HELP
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
+               
+               
+                <a class="navbar-item-login" href="/" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                    HOME
                 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="navbar-item-login" href="/login" style="color: rgb(255, 255, 255); font-size: 30px; margin-top: 2px;">
+               
+                <a class="navbar-item-login" href="/login" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
                     LOGIN
                 </a>
-    
+
+                
+
+
             </div>
         </div>
     </div>
@@ -41,9 +50,12 @@ Registration
     
     <style>
     .navbar-item-logo{
-    background: url(https://www.flaticon.com/svg/static/icons/svg/3655/3655576.svg) no-repeat center center;
-    background-size: cover;
-    width: 50px}
+    background: url({{ url_for('static', filename='img/logoto.png') }}) no-repeat center center;
+    position: relative;
+    width: 280px;
+    left: 15px;
+    background-size: contain;
+    }
     
     </style>
     
@@ -94,8 +106,8 @@ Registration
 
 
                         {{ form.submit_button}}
-                        <center>
-                            <a href="/login">Have an Account? Sign In</a>
+                        <center >
+                            <a href="/login" style="font-family: Quicksand;">Have an Account? Sign In</a>
 
                         </center>
 
