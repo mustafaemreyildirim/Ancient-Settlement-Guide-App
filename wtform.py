@@ -24,7 +24,7 @@ from passlib.hash import pbkdf2_sha256
 
 class RegForm(FlaskForm):
     """Reg Form"""
-    style={'class': 'input is-medium','font-family': 'Quicksand'}
+    style={'class': 'input is-medium','style':'font-family: Quicksand'}
 
     username = StringField('username_label',
         validators=[InputRequired(message="You need to enter a username."),
@@ -39,8 +39,7 @@ class RegForm(FlaskForm):
     
     confirm_pwd = PasswordField('confirm_pwd_label',validators=[InputRequired(message="Confirm Password"),EqualTo('password',message="Passwords need to match.")],render_kw=style)
 
-    submit_button = SubmitField('Create the account',render_kw={'button class': 'button is-block is-info is-medium is-fullwidth','font-family': 'Quicksand'})
-
+    submit_button = SubmitField('Create the account',render_kw={'button class': 'button is-block is-info is-medium is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
 
     #validate_ func automaticly invoked.    
     def validate_username(self, username):
@@ -57,14 +56,14 @@ class RegForm(FlaskForm):
 class LogForm(FlaskForm):
 
     """Login Form"""
-    style={'class': 'input is-medium','font-family': 'Quicksand'}
+    style={'class': 'input is-medium','style':'font-family: Quicksand'}
 
     username = StringField('username_label',
         validators=[InputRequired(message="You need to enter a username.")
             ],render_kw=style)
     
     password = PasswordField('password_label',validators=[InputRequired(message="You need to enter a password.")],render_kw=style)
-    submit_button = SubmitField('Login',render_kw={'button class': 'button is-block is-info is-large is-fullwidth','font-family': 'Quicksand'})
+    submit_button = SubmitField('Login',render_kw={'button class': 'button is-block is-info is-large is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
     
     
     #validate_ func automaticly invoked.    
