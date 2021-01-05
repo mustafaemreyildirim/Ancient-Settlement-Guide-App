@@ -24,8 +24,8 @@ def load_user(userid):
 def home():
     return render_template("enterance.html")
 
-@app.route("/register",methods=["GET", "POST"])
-def index():
+@app.route("/user_register",methods=["GET", "POST"])
+def user_register():
 
     reg_form = RegForm()
     
@@ -45,13 +45,13 @@ def index():
         user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('user_login'))
 
     return render_template("index.html",form=reg_form)
 
 
-@app.route("/login",methods=["GET", "POST"])
-def login():
+@app.route("/user_login",methods=["GET", "POST"])
+def user_login():
 
     login_form = LogForm()
 
@@ -63,8 +63,50 @@ def login():
     
     return render_template("login.html", form=login_form)
 
-@app.route("/cities",methods=["GET", "POST"])
 
+@app.route("/cont_register",methods=["GET", "POST"])
+def index():
+
+    reg_form = ContRegForm()
+    
+    #registration is successful and route the user into login page
+    if reg_form.validate_on_submit():
+        username = reg_form.username.data
+        name = reg_form.name.data
+        surname = reg_form.surname.data
+        email = reg_form.email.data
+        university = reg_form.university.data
+        researcharea = reg_form.researcharea.data
+        password = reg_form.password.data
+
+        hashed_pw = pbkdf2_sha256.hash(password)
+
+        createdate = datetime.now()
+ 
+
+        cont = Contributor(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,university=university,researcharea=researcharea)
+        db.session.add(cont)
+        db.session.commit()
+        return redirect(url_for('cont_login'))
+
+    return render_template("index.html",form=reg_form)
+
+
+@app.route("/cont_login",methods=["GET", "POST"])
+def cont_login():
+
+    login_form = ContLogForm()
+
+    if login_form.validate_on_submit():
+        cont=Contributor.query.filter_by(username=login_form.username.data).first()
+        login_user(cont)
+        if current_user.is_authenticated:
+            return redirect(url_for('cities'))
+    
+    return render_template("login.html", form=login_form)
+
+
+@app.route("/cities",methods=["GET", "POST"])
 def cities():
 
     if not current_user.is_authenticated:

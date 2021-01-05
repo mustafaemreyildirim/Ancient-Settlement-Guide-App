@@ -23,7 +23,7 @@ from passlib.hash import pbkdf2_sha256
  """
 
 class RegForm(FlaskForm):
-    """Reg Form"""
+    """User Reg Form"""
     style={'class': 'input is-medium','style':'font-family: Quicksand'}
 
     username = StringField('username_label',
@@ -55,7 +55,7 @@ class RegForm(FlaskForm):
 
 class LogForm(FlaskForm):
 
-    """Login Form"""
+    """ User Login Form"""
     style={'class': 'input is-medium','style':'font-family: Quicksand'}
 
     username = StringField('username_label',
@@ -83,3 +83,67 @@ class LogForm(FlaskForm):
         if not pbkdf2_sha256.verify(field.data,usern_ob.password):
             raise ValidationError("Username or password is incorrect")
      
+
+
+class ContRegForm(FlaskForm):
+    """User Reg Form"""
+    style={'class': 'input is-medium','style':'font-family: Quicksand'}
+
+    username = StringField('username_label',
+        validators=[InputRequired(message="You need to enter a username."),
+                    Length(min=4,max=50, message="The limits for the username are between 4 and 50.")],render_kw=style)
+    
+    name = StringField("name_label",  validators=[InputRequired("Please enter your name.")],render_kw=style)
+    surname = StringField("surname_label",  validators=[InputRequired("Please enter your surname.")],render_kw=style)
+    email = StringField("email_label",  validators=[InputRequired("Please enter your email address."), Email("This field requires a valid email address")],render_kw=style)
+    university = StringField("university_label",  validators=[InputRequired("Please enter your university name.")],render_kw=style)
+    researcharea = StringField("researcharea_label",  validators=[InputRequired("Please enter your research area.")],render_kw=style)
+
+    password = PasswordField('password_label',validators=[InputRequired(message="You need to enter a password."),
+                    Length(min=1,max=50, message="The limits for the password are between 1 and 50.")],render_kw=style)
+    
+    confirm_pwd = PasswordField('confirm_pwd_label',validators=[InputRequired(message="Confirm Password"),EqualTo('password',message="Passwords need to match.")],render_kw=style)
+
+    submit_button = SubmitField('Create the account',render_kw={'button class': 'button is-block is-info is-medium is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
+
+    #validate_ func automaticly invoked.    
+    def validate_username(self, username):
+        usern_ob = User.query.filter_by(username=username.data).first()
+        if usern_ob:
+            raise ValidationError("This username is being used. ")
+    
+    def validate_email(self, email):
+        usere_ob = User.query.filter_by(email=email.data).first()
+        if usere_ob:
+            raise ValidationError("This email is being used. ")
+    
+
+class ContLogForm(FlaskForm):
+
+    """ User Login Form"""
+    style={'class': 'input is-medium','style':'font-family: Quicksand'}
+
+    username = StringField('username_label',
+        validators=[InputRequired(message="You need to enter a username.")
+            ],render_kw=style)
+    
+    password = PasswordField('password_label',validators=[InputRequired(message="You need to enter a password.")],render_kw=style)
+    submit_button = SubmitField('Login',render_kw={'button class': 'button is-block is-info is-large is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
+    
+    
+    #validate_ func automaticly invoked.    
+    def validate_username(self, username):
+        usern_ob = User.query.filter_by(username=username.data).first()
+        
+        if usern_ob is None:
+
+            raise ValidationError("Username or password is incorrect ")
+    
+    def validate_password(form,field):
+        usern_ob = User.query.filter_by(username=form.username.data).first()
+        if usern_ob is None:
+
+            raise ValidationError("Username or password is incorrect ")
+    
+        if not pbkdf2_sha256.verify(field.data,usern_ob.password):
+            raise ValidationError("Username or password is incorrect")
