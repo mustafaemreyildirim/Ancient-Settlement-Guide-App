@@ -25,7 +25,7 @@ class User(UserMixin, db.Model):
 class Contributor(UserMixin, db.Model):
     """User Model"""
 
-    __tablename__ = "user"
+    __tablename__ = "contributor"
     contid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50),unique=True, nullable=False)
     password = db.Column(db.String(50), nullable=False)

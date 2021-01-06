@@ -2,7 +2,7 @@ from flask_wtf import  FlaskForm
 from markupsafe import Markup
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired,  Length, EqualTo, Email, ValidationError
-from models import User
+from models import User, Contributor
 from passlib.hash import pbkdf2_sha256
 
 
@@ -108,12 +108,12 @@ class ContRegForm(FlaskForm):
 
     #validate_ func automaticly invoked.    
     def validate_username(self, username):
-        usern_ob = User.query.filter_by(username=username.data).first()
+        usern_ob = Contributor.query.filter_by(username=username.data).first()
         if usern_ob:
             raise ValidationError("This username is being used. ")
     
     def validate_email(self, email):
-        usere_ob = User.query.filter_by(email=email.data).first()
+        usere_ob = Contributor.query.filter_by(email=email.data).first()
         if usere_ob:
             raise ValidationError("This email is being used. ")
     
@@ -133,14 +133,14 @@ class ContLogForm(FlaskForm):
     
     #validate_ func automaticly invoked.    
     def validate_username(self, username):
-        usern_ob = User.query.filter_by(username=username.data).first()
+        usern_ob = Contributor.query.filter_by(username=username.data).first()
         
         if usern_ob is None:
 
             raise ValidationError("Username or password is incorrect ")
     
     def validate_password(form,field):
-        usern_ob = User.query.filter_by(username=form.username.data).first()
+        usern_ob = Contributor.query.filter_by(username=form.username.data).first()
         if usern_ob is None:
 
             raise ValidationError("Username or password is incorrect ")

@@ -24,8 +24,8 @@ def load_user(userid):
 def home():
     return render_template("enterance.html")
 
-@app.route("/user_register",methods=["GET", "POST"])
-def user_register():
+@app.route("/register",methods=["GET", "POST"])
+def register():
 
     reg_form = RegForm()
     
@@ -45,13 +45,13 @@ def user_register():
         user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('user_login'))
+        return redirect(url_for('login'))
 
     return render_template("index.html",form=reg_form)
 
 
-@app.route("/user_login",methods=["GET", "POST"])
-def user_login():
+@app.route("/login",methods=["GET", "POST"])
+def login():
 
     login_form = LogForm()
 
