@@ -109,14 +109,22 @@ def cont_login():
     return render_template("reg_login.html", form=login_form)
 
 
+@app.route("/profile/<username>",methods=["GET", "POST"])
+def profile(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template("profile.html",user=user)
+
+
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
 
     """ if not current_user.is_authenticated:
         return "Please log into application!"
      """
+    username = current_user.get_id()
+    user = User.query.filter_by(userid=username).first()
 
-    return render_template("first.html")
+    return render_template("first.html",user=user)
 
 @app.route("/logout",methods=["GET"])
 def logout():
