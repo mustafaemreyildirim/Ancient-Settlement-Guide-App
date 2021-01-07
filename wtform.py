@@ -72,13 +72,13 @@ class LogForm(FlaskForm):
         
         if usern_ob is None:
 
-            raise ValidationError("Username or password is incorrect ")
+            raise ValidationError("Username or password is incorrect")
     
     def validate_password(form,field):
         usern_ob = User.query.filter_by(username=form.username.data).first()
         if usern_ob is None:
 
-            raise ValidationError("Username or password is incorrect ")
+            raise ValidationError("Username or password is incorrect")
     
         if not pbkdf2_sha256.verify(field.data,usern_ob.password):
             raise ValidationError("Username or password is incorrect")
@@ -137,13 +137,13 @@ class ContLogForm(FlaskForm):
         
         if usern_ob is None:
 
-            raise ValidationError("Username or password is incorrect ")
+            raise ValidationError("Username or password is incorrect")
     
     def validate_password(form,field):
         usern_ob = Contributor.query.filter_by(username=form.username.data).first()
         if usern_ob is None:
 
-            raise ValidationError("Username or password is incorrect ")
+            raise ValidationError("Username or password is incorrect")
     
         if not pbkdf2_sha256.verify(field.data,usern_ob.password):
             raise ValidationError("Username or password is incorrect")

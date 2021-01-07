@@ -43,17 +43,24 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-end" style="margin-top: 7px; font-family: Quicksand; font-weight: bold;">
-    
-                <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                <div class="buttons">
+                <a class="button" href="/help" style="color: rgb(0, 0, 0); font-size: 17px; margin-top: 2px;background-color: rgb(187, 207, 201);">
                     HELP
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
-                <a class="navbar-item-login" href="/register" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-                    REGISTER
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="navbar-item-login" href="/login" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-                    LOGIN
                 </a>
+                
+                <a class="button" href="/register" style="color: rgb(0, 0, 0); font-size: 17px; margin-top: 2px; background-color: rgb(187, 207, 201);">
+                    USER REGISTER
+                </a>
+                <a class="button" href="/login" style="color: rgb(0, 0, 0); font-size: 17px; margin-top: 2px;background-color: rgb(187, 207, 201);">
+                    USER LOGIN
+                </a>
+                <a class="button" href="/cont_register" style="color: rgb(0, 0, 0); font-size: 17px; margin-top: 2px;background-color: rgb(187, 207, 201);">
+                    CONTRIBUTOR REGISTER
+                </a>
+                <a class="button" href="/cont_login" style="color: rgb(0, 0, 0); font-size: 17px; margin-top: 2px;background-color: rgb(187, 207, 201);">
+                    CONTRIBUTOR LOGIN
+                </a>
+                </div>
 
             </div>
         </div>
@@ -65,7 +72,7 @@
     background: url({{ url_for('static', filename='img/logoto.png') }}) no-repeat center center;
     position: relative;
     width: 280px;
-    left: 15px;
+    left: 17px;
     background-size: contain;
     }
     
@@ -138,8 +145,8 @@
                             eligible to go further.
                         </h2>
                         <div class="buttons">
-                            <button class="button is-black" href="">Contributor Register</button>
-                            <button class="button" href="">Contributor Login</button>
+                            <a class="button is-black" href="/cont_register">Contributor Register</a>
+                            <a class="button" href="/cont_login">Contributor Login</a>
                         </div>
                     </div>
 

@@ -1,0 +1,91 @@
+{% from 'form_helper.html' import dField %}
+{% extends "home.html" %}
+
+{% block title %}Historai-Login {% endblock %}
+
+{% block body %}
+<body style="background-image: url({{ url_for('static', filename='img/gobeklitepe.jpg') }}); background-size: 100% 100%;">
+{% endblock %}
+
+
+{% block welcome %}
+CONTRIBUTOR LOGIN
+
+{% endblock %}
+
+{% block navbar %}
+   <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.62); height: 50px;">    
+    <div class="container">
+    <div class="navbar-brand">
+        <a class="navbar-item-logo" href="/" > </a>
+        
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end" style="font-family: Quicksand; font-weight: bold;">
+
+            <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                HELP
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="navbar-item-login" href="/" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                HOME
+            </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="navbar-item-login" href="/register" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                REGISTER
+            </a>
+
+        </div>
+    </div>
+</div>
+</nav>
+
+<style>
+.navbar-item-logo{
+background: url({{ url_for('static', filename='img/logoto.png') }}) no-repeat center center;
+position: relative;
+width: 280px;
+left: 15px;
+background-size: contain;
+}
+
+</style>
+
+{% endblock %}
+
+{% block box %}
+<div class="container has-text-centered">
+    <div class="column is-4 is-offset-4">
+<div class="box" style="padding:10px;
+            position:relative;
+             width: 400px;
+             margin-top:10px;
+            background: rgb(204, 204, 204); 
+            background: rgba(204, 204, 204, 0.6) ">
+{% endblock %}
+
+{% block form %}
+<form action="{{ url_for('cont_login')}}", method='POST' novalidate >
+            
+
+        {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}
+        <div style="line-height:40%;">
+            <br> 
+        </div>
+        {{dField(form.password, 'Password' )}}
+
+        <div>
+            <div style="line-height:60%;">
+                <br>
+            </div>
+            {{ form.submit_button}}
+        </div>
+        <p class="has-text-grey">
+             <center>
+                <div style="line-height:40%;">
+                    <br>
+                </div style="font-family: Quicksand;">
+                <a href="/">Sign Up</a> &nbsp;·&nbsp; <a href="#">Forgot Password</a> &nbsp;·&nbsp;
+            </center> 
+
+          </p>
+        {{form.csrf_token}}
+</form>
+{% endblock %}

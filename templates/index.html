@@ -76,7 +76,7 @@ Historai-Registration
     {% endblock %}
 
     {% block form %}
-                <form action="{{ url_for('index')}}" , method='POST' novalidate>
+                <form action="{{ url_for('register')}}" , method='POST' novalidate>
                     <div>
                         <div style="width: 48%; float:left">
                             {{dField(form.username, 'Username', autocomplete=true, autofocus=true) }}

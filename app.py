@@ -15,9 +15,12 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.init_app(app)
 
+
 @login.user_loader
 def load_user(userid):
     return User.query.get(int(userid))
+
+
 
 
 @app.route("/",methods=["GET", "POST"])
@@ -89,7 +92,7 @@ def index():
         db.session.commit()
         return redirect(url_for('cont_login'))
 
-    return render_template("index.html",form=reg_form)
+    return render_template("reg_index.html",form=reg_form)
 
 
 @app.route("/cont_login",methods=["GET", "POST"])
@@ -103,15 +106,15 @@ def cont_login():
         if current_user.is_authenticated:
             return redirect(url_for('cities'))
     
-    return render_template("login.html", form=login_form)
+    return render_template("reg_login.html", form=login_form)
 
 
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
 
-    if not current_user.is_authenticated:
+    """ if not current_user.is_authenticated:
         return "Please log into application!"
-    
+     """
 
     return render_template("first.html")
 
