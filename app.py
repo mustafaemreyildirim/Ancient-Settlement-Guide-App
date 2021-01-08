@@ -88,7 +88,9 @@ def index():
  
 
         cont = Contributor(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,university=university,researcharea=researcharea)
+        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
         db.session.add(cont)
+        db.session.add(user)
         db.session.commit()
         return redirect(url_for('cont_login'))
 
@@ -98,10 +100,10 @@ def index():
 @app.route("/cont_login",methods=["GET", "POST"])
 def cont_login():
 
-    login_form = ContLogForm()
+    login_form = LogForm()
 
     if login_form.validate_on_submit():
-        cont=Contributor.query.filter_by(username=login_form.username.data).first()
+        cont=User.query.filter_by(username=login_form.username.data).first()
         login_user(cont)
         if current_user.is_authenticated:
             return redirect(url_for('cities'))
@@ -112,19 +114,22 @@ def cont_login():
 @app.route("/profile/<username>",methods=["GET", "POST"])
 def profile(username):
     user = User.query.filter_by(username=username).first()
-    return render_template("profile.html",user=user)
+    cont = Contributor.query.filter_by(username=username).first()
+    message=""
+    if cont:
+        message = "This is a contributor"
+    return render_template("profile.html",user=user,cont=cont,message = message)
+
 
 
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
 
-    """ if not current_user.is_authenticated:
-        return "Please log into application!"
-     """
-    username = current_user.get_id()
-    user = User.query.filter_by(userid=username).first()
-
-    return render_template("first.html",user=user)
+    userid = current_user.get_id()
+    user = User.query.filter_by(userid=userid).first()
+    cont= Contributor.query.filter_by(contid=userid).first()
+    
+    return render_template("first.html",user=user,cont=cont)
 
 @app.route("/logout",methods=["GET"])
 def logout():
