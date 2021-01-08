@@ -20,9 +20,6 @@ login.init_app(app)
 def load_user(userid):
     return User.query.get(int(userid))
 
-
-
-
 @app.route("/",methods=["GET", "POST"])
 def home():
     return render_template("enterance.html")
@@ -118,7 +115,8 @@ def profile(username):
     message=""
     if cont:
         message = "This is a contributor"
-    return render_template("profile.html",user=user,cont=cont,message = message)
+        return render_template("cont_profile.html",user=user,cont=cont,message = message)
+    return render_template("profile.html",user=user)
 
 
 
