@@ -1,52 +1,163 @@
+<!DOCTYPE html>
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CITIES</title>
+    <title>Cover - Free Bulma template</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+    <!-- Bulma Version 0.9.0-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/blog.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+
+    <style type="text/css">
+        html,
+        body {
+            font-family: 'Open Sans';
+        }
+
+        img {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>
     <!-- START NAV -->
-    <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.9); height: 50px;">    
+    <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.4); height: 50px;">
         <div class="container">
-        <div class="navbar-brand">
-            <a class="navbar-item-logo" href="/" > </a>
-            
-        </div>
-        <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end" style="margin-top: 7px; font-family:Quicksand">
-    
-                <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-                    HELP
-                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                
-                <a class="navbar-item-login" href="/logout" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-                    LOGOUT
-                </a>
+            <div class="navbar-brand">
+                <a class="navbar-item-logo" href="/"> </a>
 
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end" style="margin-top: 7px; font-family:Quicksand">
+
+                    <a class="navbar-item-login" href="/help"
+                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                        HELP
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a class="navbar-item-login" href="/profile/{{user.username}}"
+                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                        PROFILE
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <a class="navbar-item-login" href="/logout"
+                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                        LOGOUT
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+        .navbar-item-logo {
+            background: url({{ url_for('static', filename='img/logoto.png')}})  
+                 no-repeat center center;
+        position: relative;
+        width: 280px;
+        left: 15px;
+        background-size: contain;
+        }
+    </style>
+    <!-- END NAV -->
+    <br> <br>
+    
+
+
+
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="columns is-vcentered">
+                <div class="column is-5">
+                    <figure class="image is-4by3">
+                        <img src="https://picsum.photos/800/600/?random" alt="Description">
+                    </figure>
+                </div>
+                <div class="column is-6 is-offset-1">
+
+                    <div class="box" style="border: 15px solid rgb(186, 243, 186);">
+                        <article class="media">
+
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <div class="container" style="font-family: Quicksand;">
+                                            <span class="title">
+                                                USER INFO
+                                            </span>
+                                            <br>
+                                            <br>
+
+                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Username</span>
+                                            <br>
+                                            <span class="is-size-5">{{user.username}}</span>
+                                            <br>
+                                            <div style="line-height:40%;">
+                                                <br> 
+                                            </div>
+                                                                          
+
+                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Email</span>
+                                            <br>
+                                            <span class="is-size-5">{{user.email}}</span>
+                                            <br>
+                                            <div style="line-height:40%;">
+                                                <br> 
+                                            </div>
+
+                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Name</span>
+                                            <br>
+                                            <span class="is-size-5">{{user.name}}</span>
+                                            <br>
+                                            <div style="line-height:40%;">
+                                                <br> 
+                                            </div>
+                                            
+                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Surname</span>
+                                            <br>
+                                            <span class="is-size-5">{{user.surname}}</span>
+                                            <br>
+                                            <div style="line-height:40%;">
+                                                <br> 
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                        </a>
+                                        <a class="level-item">
+                                            <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                        </a>
+                                    </div>
+                                </nav>
+
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </nav>
-    
-    <style>
-    .navbar-item-logo{
-    background: url({{ url_for('static', filename='img/logoto.png') }}) no-repeat center center;
-    position: relative;
-    width: 280px;
-    left: 15px;
-    background-size: contain;
-    }
-    
-    </style>
 
-
-    </body>
+    
+    </section>
+    <script src="../js/bulma.js"></script>
+</body>
 
 </html>

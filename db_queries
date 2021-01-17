@@ -118,3 +118,6 @@ DROP COLUMN region;
 
 ALTER TABLE "civilization"
 DROP COLUMN knownperson;
+
+ALTER TABLE "user" 
+ADD COLUMN prfimg BYTEA;

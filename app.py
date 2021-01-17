@@ -118,7 +118,9 @@ def profile(username):
         return render_template("cont_profile.html",user=user,cont=cont,message = message)
     return render_template("profile.html",user=user)
 
-
+@app.route("/add_cities", methods=["GET", "POST"])
+def add_cities():
+    return render_template("add_ancient_settlement.html")
 
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
