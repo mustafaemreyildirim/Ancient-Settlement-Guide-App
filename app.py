@@ -41,8 +41,9 @@ def register():
 
         createdate = datetime.now()
  
+        prfimg = reg_form.prfimg
 
-        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
+        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -82,10 +83,11 @@ def index():
         hashed_pw = pbkdf2_sha256.hash(password)
 
         createdate = datetime.now()
+        prfimg = reg_form.prfimg
  
 
-        cont = Contributor(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,university=university,researcharea=researcharea)
-        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate)
+        cont = Contributor(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,university=university,researcharea=researcharea,prfimg=prfimg)
+        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
         db.session.add(cont)
         db.session.add(user)
         db.session.commit()
@@ -112,22 +114,28 @@ def cont_login():
 def profile(username):
     user = User.query.filter_by(username=username).first()
     cont = Contributor.query.filter_by(username=username).first()
-    message=""
+    
+    message=0
     if cont:
-        message = "This is a contributor"
+        message = 1
         return render_template("cont_profile.html",user=user,cont=cont,message = message)
-    return render_template("profile.html",user=user)
+    return render_template("profile.html",user=user,message=message)
 
 @app.route("/add_cities", methods=["GET", "POST"])
 def add_cities():
     return render_template("add_ancient_settlement.html")
 
+@app.route("/add_paths", methods=["GET", "POST"])
+def add_cities():
+    return render_template("add_paths.html")
+
+
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
 
-    userid = current_user.get_id()
-    user = User.query.filter_by(userid=userid).first()
-    cont= Contributor.query.filter_by(contid=userid).first()
+    username = current_user.get_username()
+    user = User.query.filter_by(username=username).first()
+    cont= Contributor.query.filter_by(username=username).first()
     
     return render_template("first.html",user=user,cont=cont)
 

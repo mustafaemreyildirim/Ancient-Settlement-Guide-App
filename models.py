@@ -16,11 +16,15 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(100), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
 
+    prfimg=db.Column(db.LargeBinary)
+
     # define this func to override predefined get_id()
     # because it looks for "id", in db this column is called
     # as "userid". Hence it is implemented. 
     def get_id(self):
         return (self.userid)
+    def get_username(self):
+        return (self.username)
 
 class Contributor(UserMixin, db.Model):
     """User Model"""
@@ -37,9 +41,12 @@ class Contributor(UserMixin, db.Model):
     university = db.Column(db.String(255), nullable=False)
     researcharea = db.Column(db.String(255), nullable=False)
 
+    prfimg=db.Column(db.LargeBinary)
 
     # define this func to override predefined get_id()
     # because it looks for "id", in db this column is called
     # as "userid". Hence it is implemented. 
     def get_id(self):
         return (self.contid)
+    def get_username(self):
+        return (self.username)

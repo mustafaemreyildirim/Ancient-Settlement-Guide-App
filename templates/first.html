@@ -66,12 +66,80 @@
     
     </style>
     <!-- END NAV -->
+    
+    <style>
+        .some-page-wrapper {
+            margin: 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+            
+        }
+        .button {
+            background-color: #fd0000;
+            border: none;
+            width: 400px;
+            color: #ccc;
+            height: 70px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 30px;
+            margin-bottom: 5px;
+            font-family: Quicksand;
+        }
+
+        button:hover {
+            background-color: rgb(243, 203, 129);
+        }
+
+      
+    </style>
 
     <section class="hero is-info is-medium is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title">WILL BE BUILT</h1>
-                <h1>xss{{userid}}</h1>
+
+                
+                
+                <h1>Contributor: {{cont.username}}</h1>
+                <h1>USer: {{user.username}}</h1>
+
+                <div class='some-page-wrapper'>
+                    <div class='row'>
+                        <div class='column'>
+                            <div id="b1"></div>
+                        </div>
+                        <div class='column'>
+                            <div id="b2"></div>
+            
+                        </div>
+                    </div>
+                </div>
+                <script type = "text/javaScript"> 
+                    var greeting;
+                
+                    if ('{{cont.username}}' == '{{user.username}}'){
+                        greeting = "CONTADD";
+                        document.getElementById("b1").innerHTML = "<center><button class=\"button\" onclick=\"location.href='/add_cities'\" >ADD AN ANCIENT CITY</button></center>"
+                        document.getElementById("b2").innerHTML = "<center><button class=\"button\" onclick=\"location.href='/add_paths'\" >ADD A TRAVEL PATH</button></center>"
+
+                    }
+                    
+                </script>
+            
             </div>
         </div>
     </section>

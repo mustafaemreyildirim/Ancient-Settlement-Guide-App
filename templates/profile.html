@@ -1,3 +1,6 @@
+{% from 'form_helper.html' import dField %}
+
+
 <!DOCTYPE html>
 <html>
 
@@ -42,11 +45,7 @@
                         HELP
                     </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <a class="navbar-item-login" href="/profile/{{user.username}}"
-                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-                        PROFILE
-                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                   
                     <a class="navbar-item-login" href="/logout"
                         style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
                         LOGOUT
@@ -59,8 +58,7 @@
 
     <style>
         .navbar-item-logo {
-            background: url({{ url_for('static', filename='img/logoto.png')}})  
-                 no-repeat center center;
+            background: url({{ url_for('static', filename='img/logoto.png')}}) no-repeat center center;
         position: relative;
         width: 280px;
         left: 15px;
@@ -69,7 +67,7 @@
     </style>
     <!-- END NAV -->
     <br> <br>
-    
+
 
 
 
@@ -80,6 +78,8 @@
                     <figure class="image is-4by3">
                         <img src="https://picsum.photos/800/600/?random" alt="Description">
                     </figure>
+                    <br>
+
                 </div>
                 <div class="column is-6 is-offset-1">
 
@@ -96,37 +96,41 @@
                                             <br>
                                             <br>
 
-                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Username</span>
+                                            <span class="is-size-5"
+                                                style="font-weight:bold;text-decoration: underline;">Username</span>
                                             <br>
                                             <span class="is-size-5">{{user.username}}</span>
                                             <br>
                                             <div style="line-height:40%;">
-                                                <br> 
+                                                <br>
                                             </div>
-                                                                          
 
-                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Email</span>
+
+                                            <span class="is-size-5"
+                                                style="font-weight:bold;text-decoration: underline;">Email</span>
                                             <br>
                                             <span class="is-size-5">{{user.email}}</span>
                                             <br>
                                             <div style="line-height:40%;">
-                                                <br> 
+                                                <br>
                                             </div>
 
-                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Name</span>
+                                            <span class="is-size-5"
+                                                style="font-weight:bold;text-decoration: underline;">Name</span>
                                             <br>
                                             <span class="is-size-5">{{user.name}}</span>
                                             <br>
                                             <div style="line-height:40%;">
-                                                <br> 
+                                                <br>
                                             </div>
-                                            
-                                            <span class="is-size-5" style="font-weight:bold;text-decoration: underline;">Surname</span>
+
+                                            <span class="is-size-5"
+                                                style="font-weight:bold;text-decoration: underline;">Surname</span>
                                             <br>
                                             <span class="is-size-5">{{user.surname}}</span>
                                             <br>
                                             <div style="line-height:40%;">
-                                                <br> 
+                                                <br>
                                             </div>
                                         </div>
                                     </p>
@@ -155,7 +159,7 @@
         </div>
     </div>
 
-    
+
     </section>
     <script src="../js/bulma.js"></script>
 </body>
