@@ -123,10 +123,18 @@ def profile(username):
 
 @app.route("/add_cities", methods=["GET", "POST"])
 def add_cities():
-    return render_template("add_ancient_settlement.html")
+    set_form = AnSetForm()
+    
+    if set_form.validate_on_submit():
+        cityname = set_form.cityname.data
+        location = set_form.location.data
+        region = set_form.location.data
+        civilization=set_form.civilization.data
+
+    return render_template("add_ancient_settlement.html",form=set_form)
 
 @app.route("/add_paths", methods=["GET", "POST"])
-def add_cities():
+def add_paths():
     return render_template("add_paths.html")
 
 

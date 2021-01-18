@@ -1,6 +1,7 @@
 from flask_wtf import  FlaskForm
 from markupsafe import Markup
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField,TextAreaField
+from wtforms.fields.simple import FileField
 from wtforms.validators import InputRequired,  Length, EqualTo, Email, ValidationError
 from models import User, Contributor
 from passlib.hash import pbkdf2_sha256
@@ -147,3 +148,32 @@ class ContLogForm(FlaskForm):
     
         if not pbkdf2_sha256.verify(field.data,usern_ob.password):
             raise ValidationError("Username or password is incorrect")
+
+class AnSetForm(FlaskForm):
+    
+    
+    style={'class': 'input-field','style':'font-family: Quicksand; box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;border: 1px solid #C2C2C2; box-shadow: 1px 1px 4px ;#EBEBEB;-moz-box-shadow: 1px 1px 4px #EBEBEB;-webkit-box-shadow: 1px 1px 4px #EBEBEB;border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px; padding: 7px; outline: none;'}
+    cityname = StringField('cityname_label',
+        validators=[InputRequired(message="You need to enter a cityname.")
+            ],render_kw=style)
+
+    location = StringField('location_label',
+        validators=[InputRequired(message="You need to enter a location.")
+            ],render_kw=style)
+
+    region = StringField('region_label',
+        validators=[InputRequired(message="You need to enter a region.")
+            ],render_kw=style)
+
+    civilization = StringField('civilization_label',
+        validators=[InputRequired(message="You need to enter a civilization.")
+            ],render_kw=style)
+
+    description = TextAreaField('description_label',
+        validators=[InputRequired(message="You need to enter a description.")
+            ],render_kw={'class': 'textarea-field','style':'font-family: Quicksand; box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;border: 1px solid #C2C2C2; box-shadow: 1px 1px 4px ;#EBEBEB;-moz-box-shadow: 1px 1px 4px #EBEBEB;-webkit-box-shadow: 1px 1px 4px #EBEBEB;border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px; padding: 7px; outline: none;height: 100px;width: 68%;'})
+
+    img = FileField('img_label',
+        validators=[InputRequired(message="You need to enter a description.")])
+
+    submit_button = SubmitField('Submit',render_kw={'button class': 'button is-block is-info is-large is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})

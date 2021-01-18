@@ -50,3 +50,15 @@ class Contributor(UserMixin, db.Model):
         return (self.contid)
     def get_username(self):
         return (self.username)
+
+class Region(UserMixin, db.Model):
+    """User Model"""
+
+    __tablename__ = "region"
+    regionid = db.Column(db.Integer, primary_key=True)
+    region = db.Column(db.String(255), nullable=False)
+
+    def get_id(self):
+        return (self.regionid)
+    def get_region(self):
+        return (self.region)

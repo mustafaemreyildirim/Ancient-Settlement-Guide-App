@@ -119,5 +119,9 @@ DROP COLUMN region;
 ALTER TABLE "civilization"
 DROP COLUMN knownperson;
 
-ALTER TABLE "user" 
+ALTER TABLE "contributor" 
 ADD COLUMN prfimg BYTEA;
+
+
+ALTER TABLE "ancientsettlement" 
+ADD COLUMN description TEXT;
