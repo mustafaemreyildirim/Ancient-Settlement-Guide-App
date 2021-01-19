@@ -1,3 +1,4 @@
+from re import search
 from flask import Flask, render_template, redirect
 from flask.globals import current_app
 from flask.helpers import url_for
@@ -5,6 +6,8 @@ from wtform import *
 from models import *
 from datetime import datetime
 from flask_login import LoginManager, login_user,current_user, login_required, logout_user
+from remade_model import *
+
 
 app = Flask(__name__)
 app.secret_key="later"
@@ -41,11 +44,13 @@ def register():
 
         createdate = datetime.now()
  
-        prfimg = reg_form.prfimg
 
-        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
-        db.session.add(user)
-        db.session.commit()
+        user = User_remade(username,hashed_pw,email,createdate,name,surname)
+        user.insert()
+
+        #user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
+        #db.session.add(user)
+        #db.session.commit()
         return redirect(url_for('login'))
 
     return render_template("index.html",form=reg_form)
@@ -123,13 +128,28 @@ def profile(username):
 
 @app.route("/add_cities", methods=["GET", "POST"])
 def add_cities():
+    
     set_form = AnSetForm()
     
     if set_form.validate_on_submit():
         cityname = set_form.cityname.data
         location = set_form.location.data
-        region = set_form.location.data
-        civilization=set_form.civilization.data
+        region = set_form.region.data
+        civilization = set_form.civilization.data
+        knownperson = set_form.knownperson.data
+        description = set_form.description.data
+        img = set_form.img.data
+
+        if Region.query.filter_by(region=region).first()==None:
+            reg_add = Region(region=region)
+            db.session.add(reg_add)
+            db.session.commit()
+        if Knownperson.query.filter_by(knownperson=knownperson).first()==None: 
+            kn_add = Knownperson(knownperson=knownperson)
+            db.session.add(kn_add)
+            db.session.commit()
+            
+        return redirect(url_for('cities'))
 
     return render_template("add_ancient_settlement.html",form=set_form)
 

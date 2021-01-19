@@ -2,193 +2,198 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cover - Free Bulma template</title>
-  <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <!-- Bulma Version 0.9.0-->
-  <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
-  <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1587270922/datepicker/datedropper.css" rel="stylesheet">
-  <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1587268278/datepicker/datedropper.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cover - Free Bulma template</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Bulma Version 0.9.0-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" />
+    <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1587270922/datepicker/datedropper.css"
+        rel="stylesheet">
+    <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1587268278/datepicker/datedropper.js"></script>
 
-  <style type="text/css">
-    html,
-    body {
-      font-family: 'Quicksand';
-    }
+    <style type="text/css">
+        html,
+        body {
+            font-family: 'Quicksand';
+        }
 
-    img {
-      padding: 5px;
-      border: 1px solid #ccc;
-    }
-  </style>
+        img {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- START NAV -->
-  <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.4); height: 50px;">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item-logo" href="/"> </a>
+    <!-- START NAV -->
+    <nav class="navbar navbar-transparent" style="background-color:rgb(255, 255, 255, 0.4); height: 50px;">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item-logo" href="/"> </a>
 
-      </div>
-      <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-end" style="margin-top: 7px; font-family:Quicksand">
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end" style="margin-top: 7px; font-family:Quicksand">
 
-          <a class="navbar-item-login" href="/help" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-            HELP
-          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="navbar-item-login" href="/help"
+                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                        HELP
+                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
-          <a class="navbar-item-login" href="/logout" style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
-            LOGOUT
-          </a>
+                    <a class="navbar-item-login" href="/logout"
+                        style="color: rgb(0, 0, 0); font-size: 30px; margin-top: 2px;">
+                        LOGOUT
+                    </a>
 
+                </div>
+            </div>
         </div>
-      </div>
+    </nav>
+
+    <style>
+        .navbar-item-logo {
+            background: url({{ url_for('static', filename='img/logoto.png')}}) no-repeat center center;
+        position: relative;
+        width: 280px;
+        left: 15px;
+        background-size: contain;
+        }
+    </style>
+    <!-- END NAV -->
+    <br><br>
+    <div class="form-style-2">
+        <div class="form-style-2-heading">Provide your information</div>
+        <form action="" method="post">
+            <label for="field1"><span>Name <span class="required">*</span></span><input type="text" class="input-field"
+                    name="field1" value="" /></label>
+            <label for="field2"><span>Email <span class="required">*</span></span><input type="text" class="input-field"
+                    name="field2" value="" /></label>
+            <label><span>Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value=""
+                    maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value=""
+                    maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_3" value=""
+                    maxlength="10" /></label>
+            <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                    <option value="General Question">General</option>
+                    <option value="Advertise">Advertisement</option>
+                    <option value="Partnership">Partnership</option>
+                </select></label>
+            <label for="field5"><span>Message <span class="required">*</span></span><textarea name="field5"
+                    class="textarea-field"></textarea></label>
+
+            <label><span> </span><input type="submit" value="Submit" /></label>
+        </form>
     </div>
-  </nav>
 
-  <style>
-    .navbar-item-logo {
-      background: url({{ url_for('static', filename='img/logoto.png')}}) no-repeat center center;
-    position: relative;
-    width: 280px;
-    left: 15px;
-    background-size: contain;
-    }
-  </style>
-  <!-- END NAV -->
-  <br><br>
-  <div class="form-style-2">
-    <div class="form-style-2-heading">Provide your information</div>
-    <form action="" method="post">
-      <label for="field1"><span>Name <span class="required">*</span></span><input type="text" class="input-field"
-          name="field1" value="" /></label>
-      <label for="field2"><span>Email <span class="required">*</span></span><input type="text" class="input-field"
-          name="field2" value="" /></label>
-      <label><span>Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value=""
-          maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4" />-<input
-          type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10" /></label>
-      <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
-          <option value="General Question">General</option>
-          <option value="Advertise">Advertisement</option>
-          <option value="Partnership">Partnership</option>
-        </select></label>
-      <label for="field5"><span>Message <span class="required">*</span></span><textarea name="field5"
-          class="textarea-field"></textarea></label>
+    <style type="text/css">
+        .form-style-2 {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 700px;
+            padding: 20px 12px 10px 20px;
+            font: 13px Quicksand;
+        }
 
-      <label><span> </span><input type="submit" value="Submit" /></label>
-    </form>
-  </div>
-  
-  <style type="text/css">
-    .form-style-2{
-      margin-left: auto;
-    margin-right: auto;
-      max-width: 700px;
-      padding: 20px 12px 10px 20px;
-      font: 13px Quicksand;
-    }
-    .form-style-2-heading {
-      font-weight: bold;
-      font-style: italic;
-      border-bottom: 2px solid #ddd;
-      margin-bottom: 20px;
-      font-size: 15px;
-      padding-bottom: 3px;
-    }
+        .form-style-2-heading {
+            font-weight: bold;
+            font-style: italic;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 15px;
+            padding-bottom: 3px;
+        }
 
-    .form-style-2 label {
-      display: block;
-      margin: 0px 0px 15px 0px;
-    }
+        .form-style-2 label {
+            display: block;
+            margin: 0px 0px 15px 0px;
+        }
 
-    .form-style-2 label>span {
-      width: 100px;
-      font-weight: bold;
-      float: left;
-      padding-top: 8px;
-      padding-right: 5px;
-    }
+        .form-style-2 label>span {
+            width: 100px;
+            font-weight: bold;
+            float: left;
+            padding-top: 8px;
+            padding-right: 5px;
+        }
 
-    .form-style-2 span.required {
-      color: red;
-    }
+        .form-style-2 span.required {
+            color: red;
+        }
 
-    .form-style-2 .tel-number-field {
-      width: 40px;
-      text-align: center;
-    }
+        .form-style-2 .tel-number-field {
+            width: 40px;
+            text-align: center;
+        }
 
-    .form-style-2 input.input-field,
-    .form-style-2 .select-field {
-      width: 68%;
-    }
+        .form-style-2 input.input-field,
+        .form-style-2 .select-field {
+            width: 68%;
+        }
 
-    .form-style-2 input.input-field,
-    .form-style-2 .tel-number-field,
-    .form-style-2 .textarea-field,
-    .form-style-2 .select-field {
-      box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      border: 1px solid #C2C2C2;
-      box-shadow: 1px 1px 4px #EBEBEB;
-      -moz-box-shadow: 1px 1px 4px #EBEBEB;
-      -webkit-box-shadow: 1px 1px 4px #EBEBEB;
-      border-radius: 3px;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      padding: 7px;
-      outline: none;
-    }
+        .form-style-2 input.input-field,
+        .form-style-2 .tel-number-field,
+        .form-style-2 .textarea-field,
+        .form-style-2 .select-field {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            border: 1px solid #C2C2C2;
+            box-shadow: 1px 1px 4px #EBEBEB;
+            -moz-box-shadow: 1px 1px 4px #EBEBEB;
+            -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            padding: 7px;
+            outline: none;
+        }
 
-    .form-style-2 .input-field:focus,
-    .form-style-2 .tel-number-field:focus,
-    .form-style-2 .textarea-field:focus,
-    .form-style-2 .select-field:focus {
-      border: 1px solid #0C0;
-    }
+        .form-style-2 .input-field:focus,
+        .form-style-2 .tel-number-field:focus,
+        .form-style-2 .textarea-field:focus,
+        .form-style-2 .select-field:focus {
+            border: 1px solid #0C0;
+        }
 
-    .form-style-2 .textarea-field {
-      height: 100px;
-      width: 68%;
-    }
+        .form-style-2 .textarea-field {
+            height: 100px;
+            width: 68%;
+        }
 
-    .form-style-2 input[type=submit],
-    .form-style-2 input[type=button] {
-      border: none;
-      padding: 8px 15px 8px 15px;
-      background: #FF8500;
-      color: #fff;
-      box-shadow: 1px 1px 4px #DADADA;
-      -moz-box-shadow: 1px 1px 4px #DADADA;
-      -webkit-box-shadow: 1px 1px 4px #DADADA;
-      border-radius: 3px;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-    }
+        .form-style-2 input[type=submit],
+        .form-style-2 input[type=button] {
+            border: none;
+            padding: 8px 15px 8px 15px;
+            background: #FF8500;
+            color: #fff;
+            box-shadow: 1px 1px 4px #DADADA;
+            -moz-box-shadow: 1px 1px 4px #DADADA;
+            -webkit-box-shadow: 1px 1px 4px #DADADA;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+        }
 
-    .form-style-2 input[type=submit]:hover,
-    .form-style-2 input[type=button]:hover {
-      background: #EA7B00;
-      color: #fff;
-    }
-  </style>
+        .form-style-2 input[type=submit]:hover,
+        .form-style-2 input[type=button]:hover {
+            background: #EA7B00;
+            color: #fff;
+        }
+    </style>
 
 
 
 
 
 
-  </section>
-  <script src="../js/bulma.js"></script>
+    </section>
+    <script src="../js/bulma.js"></script>
 </body>
 
 </html>

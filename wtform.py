@@ -169,6 +169,10 @@ class AnSetForm(FlaskForm):
         validators=[InputRequired(message="You need to enter a civilization.")
             ],render_kw=style)
 
+    knownperson = StringField('knownperson_label',
+        validators=[InputRequired(message="You need to enter a known person from the city.")
+            ],render_kw=style)
+
     description = TextAreaField('description_label',
         validators=[InputRequired(message="You need to enter a description.")
             ],render_kw={'class': 'textarea-field','style':'font-family: Quicksand; box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;border: 1px solid #C2C2C2; box-shadow: 1px 1px 4px ;#EBEBEB;-moz-box-shadow: 1px 1px 4px #EBEBEB;-webkit-box-shadow: 1px 1px 4px #EBEBEB;border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px; padding: 7px; outline: none;height: 100px;width: 68%;'})
@@ -176,4 +180,4 @@ class AnSetForm(FlaskForm):
     img = FileField('img_label',
         validators=[InputRequired(message="You need to enter a description.")])
 
-    submit_button = SubmitField('Submit',render_kw={'button class': 'button is-block is-info is-large is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
+    submit_button = SubmitField('Submit',render_kw={'button class': 'button ','style':'font-family: Quicksand;font-weight:bold;border: none;padding: 8px 15px 8px 15px;background: #FF8500;color: #fff; box-shadow: 1px 1px 4px #DADADA;-moz-box-shadow: 1px 1px 4px #DADADA;-webkit-box-shadow: 1px 1px 4px #DADADA; border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px;'})

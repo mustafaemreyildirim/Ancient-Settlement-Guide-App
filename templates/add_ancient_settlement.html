@@ -70,33 +70,45 @@
   <br><br>
   <div class="form-style-2">
     <div class="form-style-2-heading">ADD AN ANCIENT SETTLEMENT BELOW</div>
-    <form action="" method="post">
-      <label for="field1"><span>City Name <span class="required">*</span></span>          {{dField(form.cityname, 'City Name') }}
-</label>
-      <label for="field2"><span>Location <span class="required">*</span></span>          {{dField(form.location, 'Location') }}
-</label>
+    <form "{{ url_for('add_cities')}}" , method='POST' novalidate>
       
-          <label for="field2"><span>Region  <span class="required">*</span></span>          {{dField(form.region, 'Region') }}
-</label>
-          <label for="field2"><span>Civilizations  <span class="required">*</span> </span>          {{dField(form.civilization, 'Civilizations') }}
-  </label>
+      {{form.csrf_token}}
 
-      
-      <label for="field5"><span>Description <span class="required">*</span></span>{{dField(form.description, 'Description') }}</label>
-      <label for="field5"><span>Image of the Site <span class="required">*</span></span>{{dField(form.img, 'Image ') }}</label>
+      <label for="field1"><span>City Name <span class="required">*</span></span> {{dField(form.cityname, 'City Name') }}
+      </label>
+      <label for="field2"><span>Location <span class="required">*</span></span> {{dField(form.location, 'Location') }}
+      </label>
 
-      <label><span> </span><input type="submit" value="Submit" /></label>
+      <label for="field2"><span>Region <span class="required">*</span></span> {{dField(form.region, 'Region') }}
+      </label>
+      <label for="field2"><span>Civilizations <span class="required">*</span> </span>
+        {{dField(form.civilization, 'Civilizations') }}
+      </label>
+
+      <label for="field2"><span>A Famous Person <span class="required">*</span> </span>
+        {{dField(form.knownperson , 'One Well Known person from the City') }}
+      </label>
+
+
+      <label for="field5"><span>Description <span
+            class="required">*</span></span>{{dField(form.description, 'Description') }}</label>
+      <label for="field5"><span>Image of the Site <span
+            class="required">*</span></span>{{dField(form.img, 'Image ') }}</label>
+
+      {{ form.submit_button}}
+
     </form>
   </div>
-  
+
   <style type="text/css">
-    .form-style-2{
+    .form-style-2 {
       margin-left: auto;
-    margin-right: auto;
+      margin-right: auto;
       max-width: 700px;
       padding: 20px 12px 10px 20px;
       font: 13px Quicksand;
     }
+
     .form-style-2-heading {
       font-weight: bold;
       font-style: italic;

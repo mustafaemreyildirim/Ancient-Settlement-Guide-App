@@ -125,3 +125,6 @@ ADD COLUMN prfimg BYTEA;
 
 ALTER TABLE "ancientsettlement" 
 ADD COLUMN description TEXT;
+
+ALTER TABLE "ancientsettlement" 
+ADD COLUMN setimg BYTEA;
