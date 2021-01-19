@@ -107,6 +107,7 @@ class ContRegForm(FlaskForm):
 
     submit_button = SubmitField('Create the account',render_kw={'button class': 'button is-block is-info is-medium is-fullwidth','style':'font-family: Quicksand;font-weight:bold'})
 
+
     #validate_ func automaticly invoked.    
     def validate_username(self, username):
         usern_ob = Contributor.query.filter_by(username=username.data).first()
@@ -179,5 +180,33 @@ class AnSetForm(FlaskForm):
 
     img = FileField('img_label',
         validators=[InputRequired(message="You need to enter a description.")])
+
+    submit_button = SubmitField('Submit',render_kw={'button class': 'button ','style':'font-family: Quicksand;font-weight:bold;border: none;padding: 8px 15px 8px 15px;background: #FF8500;color: #fff; box-shadow: 1px 1px 4px #DADADA;-moz-box-shadow: 1px 1px 4px #DADADA;-webkit-box-shadow: 1px 1px 4px #DADADA; border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px;'})
+
+
+class PathForm(FlaskForm):
+    
+    
+    style={'class': 'input-field','style':'font-family: Quicksand; box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;border: 1px solid #C2C2C2; box-shadow: 1px 1px 4px ;#EBEBEB;-moz-box-shadow: 1px 1px 4px #EBEBEB;-webkit-box-shadow: 1px 1px 4px #EBEBEB;border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px; padding: 7px; outline: none;'}
+    pathname = StringField('pathname_label',
+        validators=[InputRequired(message="You need to enter a pathname.")
+            ],render_kw=style)
+
+    artifacts = StringField('artifacts_label',
+        validators=[InputRequired(message="You need to enter an artifact.")
+            ],render_kw=style)
+
+
+    civilization = StringField('civilization_label',
+        validators=[InputRequired(message="You need to enter a civilization.")
+            ],render_kw=style)
+
+    location = StringField('knownperson_label',
+        validators=[InputRequired(message="You need to enter a location.")
+            ],render_kw=style)
+
+    
+    pathimg = FileField('img_label',
+        validators=[InputRequired(message="You need to upload an image.")])
 
     submit_button = SubmitField('Submit',render_kw={'button class': 'button ','style':'font-family: Quicksand;font-weight:bold;border: none;padding: 8px 15px 8px 15px;background: #FF8500;color: #fff; box-shadow: 1px 1px 4px #DADADA;-moz-box-shadow: 1px 1px 4px #DADADA;-webkit-box-shadow: 1px 1px 4px #DADADA; border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px;'})

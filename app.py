@@ -17,11 +17,13 @@ db = SQLAlchemy(app)
 
 login = LoginManager(app)
 login.init_app(app)
+usr=0
 
 
 @login.user_loader
-def load_user(userid):
-    return User.query.get(int(userid))
+def load_user(user_id):
+    
+    return get_user(user_id)
 
 @app.route("/",methods=["GET", "POST"])
 def home():
@@ -29,7 +31,11 @@ def home():
 
 @app.route("/register",methods=["GET", "POST"])
 def register():
-
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
     reg_form = RegForm()
     
     #registration is successful and route the user into login page
@@ -46,7 +52,7 @@ def register():
  
 
         user = User_remade(username,hashed_pw,email,createdate,name,surname)
-        user.insert()
+        user.insert(con,cur)
 
         #user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
         #db.session.add(user)
@@ -55,23 +61,38 @@ def register():
 
     return render_template("index.html",form=reg_form)
 
-
 @app.route("/login",methods=["GET", "POST"])
 def login():
-
-    login_form = LogForm()
-
-    if login_form.validate_on_submit():
-        user=User.query.filter_by(username=login_form.username.data).first()
-        login_user(user)
-        if current_user.is_authenticated:
-            return redirect(url_for('cities'))
     
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
+    
+    global usr
+    login_form = LogForm()
+    if login_form.validate_on_submit():
+        
+        us_ret = get_user(login_form.username.data)
+        #user=User.query.filter_by(username=login_form.username.data).first()
+        
+        login_user(us_ret)
+        if current_user.is_authenticated: 
+            usr=current_user.username
+            return redirect(url_for('cities'))
+
     return render_template("login.html", form=login_form)
 
 
 @app.route("/cont_register",methods=["GET", "POST"])
 def index():
+
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
 
     reg_form = ContRegForm()
     
@@ -88,14 +109,16 @@ def index():
         hashed_pw = pbkdf2_sha256.hash(password)
 
         createdate = datetime.now()
-        prfimg = reg_form.prfimg
  
 
-        cont = Contributor(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,university=university,researcharea=researcharea,prfimg=prfimg)
-        user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
-        db.session.add(cont)
-        db.session.add(user)
-        db.session.commit()
+        cont = Cont_remade (username,hashed_pw,email,createdate,name,surname,university,researcharea)
+        cont.insert(con,cur)
+        user = User_remade(username,hashed_pw,email,createdate,name,surname)
+        user.insert(con,cur)
+
+        #db.session.add(cont)
+        #db.session.add(user)
+        #db.session.commit()
         return redirect(url_for('cont_login'))
 
     return render_template("reg_index.html",form=reg_form)
@@ -103,13 +126,20 @@ def index():
 
 @app.route("/cont_login",methods=["GET", "POST"])
 def cont_login():
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
 
     login_form = LogForm()
-
-    if login_form.validate_on_submit():
-        cont=User.query.filter_by(username=login_form.username.data).first()
-        login_user(cont)
-        if current_user.is_authenticated:
+    global usr
+    if login_form.validate_on_submit(): 
+        us_ret = get_user(login_form.username.data)
+        #user=User.query.filter_by(username=login_form.username.data).first()
+        login_user(us_ret)
+        if current_user.is_authenticated: 
+            usr=current_user.username
             return redirect(url_for('cities'))
     
     return render_template("reg_login.html", form=login_form)
@@ -117,8 +147,14 @@ def cont_login():
 
 @app.route("/profile/<username>",methods=["GET", "POST"])
 def profile(username):
-    user = User.query.filter_by(username=username).first()
-    cont = Contributor.query.filter_by(username=username).first()
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
+    
+    user = get_user(username)
+    cont= get_cont(username,con,cur)
     
     message=0
     if cont:
@@ -128,7 +164,12 @@ def profile(username):
 
 @app.route("/add_cities", methods=["GET", "POST"])
 def add_cities():
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
     
+    cur.execute("ROLLBACK")
+    con.commit()
+
     set_form = AnSetForm()
     
     if set_form.validate_on_submit():
@@ -140,11 +181,15 @@ def add_cities():
         description = set_form.description.data
         img = set_form.img.data
 
-        if Region.query.filter_by(region=region).first()==None:
+        reg = get_reg(region,con,cur)
+        if reg==None:
             reg_add = Region(region=region)
             db.session.add(reg_add)
             db.session.commit()
-        if Knownperson.query.filter_by(knownperson=knownperson).first()==None: 
+
+
+        kp = get_fp(knownperson,con,cur)
+        if kp==None: 
             kn_add = Knownperson(knownperson=knownperson)
             db.session.add(kn_add)
             db.session.commit()
@@ -155,16 +200,34 @@ def add_cities():
 
 @app.route("/add_paths", methods=["GET", "POST"])
 def add_paths():
-    return render_template("add_paths.html")
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
+    
+    cur.execute("ROLLBACK")
+    con.commit()
+
+    path_form = PathForm()
+    if path_form.validate_on_submit():
+        pathname = path_form.pathname.data
+        artifacts = path_form.artifacts.data
+        civilization = path_form.civilization.data
+        location = path_form.location.data
+        pathimg = path_form.pathimg.data
+
+
+    return render_template("add_paths.html",form=path_form)
 
 
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
-
-    username = current_user.get_username()
-    user = User.query.filter_by(username=username).first()
-    cont= Contributor.query.filter_by(username=username).first()
+    global usr
+    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+    cur = con.cursor()
     
+    cur.execute("ROLLBACK")
+    con.commit()
+    user = get_user(usr)
+    cont = get_cont(usr,con,cur)
     return render_template("first.html",user=user,cont=cont)
 
 @app.route("/logout",methods=["GET"])

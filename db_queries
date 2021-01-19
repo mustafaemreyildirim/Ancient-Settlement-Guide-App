@@ -55,6 +55,7 @@ CREATE TABLE "votes" (
 	votescount INT UNIQUE NOT NULL,
 );
 
+INSERT INTO "region" (region) VALUES('mesopotamia');
 
 ALTER TABLE "contributor" 
 ADD COLUMN contid SERIAL NOT NULL REFERENCES "contributor" (contid)
@@ -128,3 +129,27 @@ ADD COLUMN description TEXT;
 
 ALTER TABLE "ancientsettlement" 
 ADD COLUMN setimg BYTEA;
+
+
+
+
+
+
+
+import psycopg2
+
+con = psycopg.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
+
+cur = con.cursor()
+cur.execute("ROLLBACK")
+con.commit()
+
+cur.execute("INSERT INTO "region" (region) VALUES('mesopotamia');")
+
+
+User.query.filter_by(username=username).first() ->cur.execute("SELECT 1 FROM \"region\"  WHERE \"region\" = 'asia minor' LIMIT 1")
+
+
+print ("\nShow me the databases:\n")
+for row in rows:
+    print ("   ", row[0])
