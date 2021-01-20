@@ -131,7 +131,8 @@ ALTER TABLE "ancientsettlement"
 ADD COLUMN setimg BYTEA;
 
 
-
+ALTER TABLE "paths" 
+ADD COLUMN pathimg BYTEA;
 
 
 
@@ -153,3 +154,34 @@ User.query.filter_by(username=username).first() ->cur.execute("SELECT 1 FROM \"r
 print ("\nShow me the databases:\n")
 for row in rows:
     print ("   ", row[0])
+
+
+
+INSERT INTO "civilization" (civilizationname,goldenage,knownpersonid)
+VALUES ( ' Greek','Hellenistic',(SELECT knownpersonid FROM "famousperson" WHERE "knownperson"='darius'));
+
+
+INSERT INTO "location" (location,regionid)
+VALUES ( 'izmir',(SELECT regionid FROM "region" WHERE "region"='aegian'));
+
+
+INSERT INTO "ancientsettlement" (cityname,contid,locationid,civid,description,setimg)
+VALUES ( 'aizonai',(SELECT contid FROM "contributor" WHERE "username"='yildirimmus16'),(SELECT locationid FROM "location" WHERE "location"='izmir'),(SELECT civid FROM "civilization" WHERE "civilizationname"='aegian'),'bu bir testtir.',pg_read_binary_file('/home/memre/Desktop/eph.jpeg')::bytea);
+
+
+cur.execute("SELECT civilizationname FROM \"civilization\" WHERE  \"civid\"= %s",(civ_id,))
+
+
+SELECT civilizationname, goldenage,knownperson FROM civilization LEFT JOIN famousperson ON civilization.knownpersonid = famousperson.knownpersonid;
+SELECT location,region FROM location LEFT JOIN region ON location.regionid=region.regionid ;
+
+
+
+SELECT civilizationname, goldenage,knownperson ,location,region FROM civilization LEFT JOIN famousperson ON civilization.knownpersonid = famousperson.knownpersonid LEFT JOIN region ON location.regionid=region.regionid ;
+
+
+SELECT an.cityname,civ.civilizationname, civ.goldenage,kp.knownperson FROM civilization AS civ LEFT JOIN famousperson AS kp ON civ.knownpersonid = kp.knownpersonid LEFT JOIN ancientsettlement as an ON an.civid=civ.civid;
+
+
+SELECT an.cityname,civ.civilizationname, civ.goldenage,kp.knownperson,con.username,loc.location,reg.region,an.setimg FROM civilization AS civ LEFT JOIN famousperson AS kp ON civ.knownpersonid = kp.knownpersonid LEFT JOIN ancientsettlement as an ON an.civid=civ.civid LEFT JOIN contributor AS con ON con.contid = an.contid LEFT JOIN location AS loc ON loc.locationid = an.locationid LEFT JOIN region as reg ON loc.regionid = reg.regionid;
+ 

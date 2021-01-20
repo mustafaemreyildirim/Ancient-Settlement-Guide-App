@@ -12,8 +12,7 @@ from remade_model import *
 app = Flask(__name__)
 app.secret_key="later"
 
-app.config['SQLALCHEMY_DATABASE_URI']="postgres://zlcsxccctwmvdp:b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4@ec2-34-194-198-238.compute-1.amazonaws.com:5432/d35q9ogcrt02v1"
-db = SQLAlchemy(app)
+
 
 login = LoginManager(app)
 login.init_app(app)
@@ -31,11 +30,7 @@ def home():
 
 @app.route("/register",methods=["GET", "POST"])
 def register():
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
     reg_form = RegForm()
     
     #registration is successful and route the user into login page
@@ -52,7 +47,7 @@ def register():
  
 
         user = User_remade(username,hashed_pw,email,createdate,name,surname)
-        user.insert(con,cur)
+        user.insert()
 
         #user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
         #db.session.add(user)
@@ -64,11 +59,7 @@ def register():
 @app.route("/login",methods=["GET", "POST"])
 def login():
     
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
     
     global usr
     login_form = LogForm()
@@ -88,11 +79,7 @@ def login():
 @app.route("/cont_register",methods=["GET", "POST"])
 def index():
 
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
 
     reg_form = ContRegForm()
     
@@ -112,9 +99,9 @@ def index():
  
 
         cont = Cont_remade (username,hashed_pw,email,createdate,name,surname,university,researcharea)
-        cont.insert(con,cur)
+        cont.insert()
         user = User_remade(username,hashed_pw,email,createdate,name,surname)
-        user.insert(con,cur)
+        user.insert()
 
         #db.session.add(cont)
         #db.session.add(user)
@@ -126,11 +113,7 @@ def index():
 
 @app.route("/cont_login",methods=["GET", "POST"])
 def cont_login():
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
 
     login_form = LogForm()
     global usr
@@ -147,14 +130,10 @@ def cont_login():
 
 @app.route("/profile/<username>",methods=["GET", "POST"])
 def profile(username):
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
     
     user = get_user(username)
-    cont= get_cont(username,con,cur)
+    cont= get_cont(username)
     
     message=0
     if cont:
@@ -164,47 +143,56 @@ def profile(username):
 
 @app.route("/add_cities", methods=["GET", "POST"])
 def add_cities():
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
 
     set_form = AnSetForm()
-    
+    global usr
     if set_form.validate_on_submit():
         cityname = set_form.cityname.data
         location = set_form.location.data
         region = set_form.region.data
         civilization = set_form.civilization.data
+        goldenage = set_form.goldenage.data
         knownperson = set_form.knownperson.data
         description = set_form.description.data
         img = set_form.img.data
 
-        reg = get_reg(region,con,cur)
+        reg = get_reg(region)
         if reg==None:
-            reg_add = Region(region=region)
-            db.session.add(reg_add)
-            db.session.commit()
-
-
-        kp = get_fp(knownperson,con,cur)
-        if kp==None: 
-            kn_add = Knownperson(knownperson=knownperson)
-            db.session.add(kn_add)
-            db.session.commit()
             
+            reg_add = Region_remade(region)
+            reg_add.insert()
+            
+
+
+        kp = get_fp(knownperson)
+        if kp==None: 
+            kn_add = Knownp_remade(knownperson)
+            kn_add.insert()
+        
+
+        civi = get_civi(civilization)
+        if civi == None:
+            civi_add = Civi_remade(civilization,goldenage,knownperson)
+            civi_add.insert()
+        
+        loc = get_loc(location)
+        if loc == None:
+            loc_add = Location_remade(location,region)
+            loc_add.insert()
+        print("----------------------------------------->>>>",usr)
+        aset = get_set(cityname)
+        if aset == None:
+            aset_add = AnSett_remade(cityname,usr,location,civilization,description,img)
+            aset_add.insert()
+        
         return redirect(url_for('cities'))
 
     return render_template("add_ancient_settlement.html",form=set_form)
 
 @app.route("/add_paths", methods=["GET", "POST"])
 def add_paths():
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
 
     path_form = PathForm()
     if path_form.validate_on_submit():
@@ -213,7 +201,34 @@ def add_paths():
         civilization = path_form.civilization.data
         location = path_form.location.data
         pathimg = path_form.pathimg.data
+        region = path_form.region.data
+        knownperson = path_form.knownperson.data
+        goldenage= path_form.goldenage.data
 
+        reg = get_reg(region)
+        if reg==None:
+            
+            reg_add = Region_remade(region)
+            reg_add.insert()
+        kp = get_fp(knownperson)
+        if kp==None:
+            kp_add=Knownp_remade(knownperson)
+            kp_add.insert()
+        cv = get_civi(civilization)
+        if cv == None:
+            cv_add = Civi_remade(civilization,goldenage,knownperson)
+            cv_add.insert()
+        
+        lk = get_loc(location)
+        if lk== None:
+            lk_add= Location_remade(location,region)
+            lk_add.insert()
+        pt = get_path(pathname)
+        if pt == None:
+            pt_add = Path_remade(pathname,artifacts,civilization,location,pathimg)
+            pt_add.insert()
+
+        return redirect(url_for('cities'))
 
     return render_template("add_paths.html",form=path_form)
 
@@ -221,14 +236,16 @@ def add_paths():
 @app.route("/cities",methods=["GET", "POST"])
 def cities():
     global usr
-    con = psycopg2.connect("dbname='d35q9ogcrt02v1' user='zlcsxccctwmvdp' host='ec2-34-194-198-238.compute-1.amazonaws.com' password='b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4'")
-    cur = con.cursor()
     
-    cur.execute("ROLLBACK")
-    con.commit()
     user = get_user(usr)
-    cont = get_cont(usr,con,cur)
-    return render_template("first.html",user=user,cont=cont)
+    cont = get_cont(usr)
+    ls = bring_all_cities()
+    ms = bring_all_paths()
+    mlen = len(ms)
+
+    leng = len(ls)
+  
+    return render_template("first.html",user=user,cont=cont,ls=ls,leng=leng,ms=ms,mlen=mlen)
 
 @app.route("/logout",methods=["GET"])
 def logout():

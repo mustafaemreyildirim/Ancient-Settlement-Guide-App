@@ -107,17 +107,12 @@
       
     </style>
 
-    <section class="hero is-info is-medium is-bold">
+    <section class="hero is-info is-medium is-bold" style="background-image:url({{ url_for('static', filename='img/w.jpg') }})">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <h1 class="title">WILL BE BUILT</h1>
-
-                
-                
-                <h1>Contributor: {{cont.username}}</h1>
-                <h1>USer: {{user.username}}</h1>
-
+                       
                 <div class='some-page-wrapper'>
+                    <h1 id="but" style=" font-family: Quicksand;color: black;font-size: 40px;font-weight: bold;"></h1>
                     <div class='row'>
                         <div class='column'>
                             <div id="b1"></div>
@@ -137,6 +132,10 @@
                         document.getElementById("b2").innerHTML = "<center><button class=\"button\" onclick=\"location.href='/add_paths'\" >ADD A TRAVEL PATH</button></center>"
 
                     }
+                    else{
+                        document.getElementById('but').innerHTML = "WELCOME";
+                    }
+                    
                     
                 </script>
             
@@ -144,7 +143,7 @@
         </div>
     </section>
 
-
+    {%for i in range(0, leng)%} 
     <div class="container">
         <!-- START ARTICLE FEED -->
         <section class="articles">
@@ -153,71 +152,85 @@
                 <div class="card article">
                     <div class="card-content">
                         <div class="media">
-                            <div class="media-content has-text-centered">
-                                <p class="title article-title"></p>
-                                <div class="tags has-addons level-item">
-                                    <span class="tag is-rounded is-info"></span>
-                                    <span class="tag is-rounded"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content article-body">
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- END ARTICLE -->
-                <!-- START ARTICLE -->
-                <div class="card article">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-center">
-                            </div>
-                            <div class="media-content has-text-centered">
-                                <p class="title article-title"></p>
-                                <p class="subtitle is-6 article-subtitle">
-                                    </p>
-                            </div>
-                        </div>
-                        <div class="content article-body">
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- END ARTICLE -->
-                <!-- START PROMO BLOCK -->
-                <section class="hero is-info is-bold is-small promo-block">
-                    <div class="hero-body">
-                        <div class="container">
-                            
-                        </div>
-                    </div>
-                </section>
-                <!-- END PROMO BLOCK -->
-                <!-- START ARTICLE -->
-                <div class="card article">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-center">
-                            </div>
-                            <div class="media-content has-text-centered">
-                               
-                            </div>
-                        </div>
-                        <div class="content article-body">
                            
+  
+                        </div>
+                        <div class="content article-body" style="font-family:Quicksand;">
+                            <h1 class="has-text-centered " style="text-decoration: underline;">{{ls[i][0]}}</h1>
+
+                            <h3 >
+                                Civilizations: {{ls[i][1]}}                           
+                            </h3>
+
+                            <h3>
+                                Era: {{ls[i][2]}}                           
+                            </h3>
+                            <h3>
+                                Famous One: {{ls[i][3]}}                           
+                            </h3>
+                            <h3>
+                                Ancient Region: {{ls[i][6]}}                           
+                            </h3>
+                            <h3>
+                                Where: {{ls[i][5]}}                           
+                            </h3>
+                            
+                            <p>
+                                {{ls[i][7]}}
+                            </p>
+                            <p style="font-weight: bold;">Written by {{ls[i][4]}}</p>
                         </div>
                     </div>
                 </div>
-                <!-- END ARTICLE -->
-              </div>
-              <section id="footer" class="section has-green-bg">
-                <div class="container has-text-centered">
-                  
-                </div>
-            </section>
-
+                <!-- START ARTICLE -->
+               
         </section>
+        {%endfor%} 
+
+    {%for i in range(0, mlen)%} 
+    <div class="container">
+        <!-- START ARTICLE FEED -->
+        <section class="articles">
+            <div class="column is-8 is-offset-2">
+                <!-- START ARTICLE -->
+                <div class="card article">
+                    <div class="card-content">
+                        <div class="media">
+                           
+  
+                        </div>
+                        <div class="content article-body" style="font-family:Quicksand;">
+                            <center><h1 style="size: 80px; font-family:Quicksand;">PATHS</h1></center>
+
+                            <h1 class="has-text-centered " style="text-decoration: underline;">{{ms[i][0]}}</h1>
+
+                            <h3 >
+                                Artifacts: {{ms[i][1]}}                           
+                            </h3>
+
+                            <h3>
+                                Civilizations: {{ms[i][2]}}                           
+                            </h3>
+                            <h3>
+                                Golden Age: {{ms[i][3]}}                           
+                            </h3>
+                            <h3>
+                                A Well Known Man: {{ms[i][4]}}                           
+                            </h3>
+                            <h3>
+                                Location: {{ms[i][5]}}                           
+                            </h3>
+                            
+                            <h3>
+                                Region: {{ms[i][6]}}                           
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- START ARTICLE -->
+               
+        </section>
+        {%endfor%} 
         <!-- END ARTICLE FEED -->
         </div>
         <script async type="text/javascript" src="../js/bulma.js"></script>

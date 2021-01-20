@@ -170,6 +170,10 @@ class AnSetForm(FlaskForm):
         validators=[InputRequired(message="You need to enter a civilization.")
             ],render_kw=style)
 
+    goldenage = StringField('goldenage_label',
+        validators=[InputRequired(message="You need to enter a goldenage.")
+            ],render_kw=style)
+
     knownperson = StringField('knownperson_label',
         validators=[InputRequired(message="You need to enter a known person from the city.")
             ],render_kw=style)
@@ -204,8 +208,18 @@ class PathForm(FlaskForm):
     location = StringField('knownperson_label',
         validators=[InputRequired(message="You need to enter a location.")
             ],render_kw=style)
+    goldenage = StringField('goldenage_label',
+        validators=[InputRequired(message="You need to enter a goldenage.")
+            ],render_kw=style)
 
-    
+    knownperson = StringField('knownperson_label',
+        validators=[InputRequired(message="You need to enter a known person from the city.")
+            ],render_kw=style)
+
+    region = StringField('region_label',
+        validators=[InputRequired(message="You need to enter a region.")
+            ],render_kw=style)
+
     pathimg = FileField('img_label',
         validators=[InputRequired(message="You need to upload an image.")])
 
