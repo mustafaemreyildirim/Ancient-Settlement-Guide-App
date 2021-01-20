@@ -6,7 +6,7 @@ from wtform import *
 from datetime import datetime
 from flask_login import LoginManager, login_user,current_user, login_required, logout_user
 from remade_model import *
-
+import os
 
 app = Flask(__name__)
 app.secret_key="later"
@@ -16,7 +16,7 @@ app.secret_key="later"
 # There were consistent errors in validation, to overcome it, I just use Sqlalchemy in there.
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI']="postgres://zlcsxccctwmvdp:b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4@ec2-34-194-198-238.compute-1.amazonaws.com:5432/d35q9ogcrt02v1"
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 db = SQLAlchemy(app)
 
 
