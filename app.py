@@ -3,7 +3,6 @@ from flask import Flask, render_template, redirect
 from flask.globals import current_app
 from flask.helpers import url_for
 from wtform import *
-from models import *
 from datetime import datetime
 from flask_login import LoginManager, login_user,current_user, login_required, logout_user
 from remade_model import *
@@ -12,6 +11,13 @@ from remade_model import *
 app = Flask(__name__)
 app.secret_key="later"
 
+
+# I just use it for invalidater user. I created my own database model and all the queries are implemented.
+# There were consistent errors in validation, to overcome it, I just use Sqlalchemy in there.
+from flask_sqlalchemy import SQLAlchemy
+
+app.config['SQLALCHEMY_DATABASE_URI']="postgres://zlcsxccctwmvdp:b2b27bc4b07b3b309412b7c51e0483eaea106ba964509517379406b3ae762bf4@ec2-34-194-198-238.compute-1.amazonaws.com:5432/d35q9ogcrt02v1"
+db = SQLAlchemy(app)
 
 
 login = LoginManager(app)

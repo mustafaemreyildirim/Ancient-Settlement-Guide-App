@@ -125,7 +125,7 @@ ADD COLUMN prfimg BYTEA;
 
 
 ALTER TABLE "ancientsettlement" 
-ADD COLUMN description TEXT;
+ADD COLUMN rmlink TEXT;
 
 ALTER TABLE "ancientsettlement" 
 ADD COLUMN setimg BYTEA;
@@ -185,3 +185,5 @@ SELECT an.cityname,civ.civilizationname, civ.goldenage,kp.knownperson FROM civil
 
 SELECT an.cityname,civ.civilizationname, civ.goldenage,kp.knownperson,con.username,loc.location,reg.region,an.setimg FROM civilization AS civ LEFT JOIN famousperson AS kp ON civ.knownpersonid = kp.knownpersonid LEFT JOIN ancientsettlement as an ON an.civid=civ.civid LEFT JOIN contributor AS con ON con.contid = an.contid LEFT JOIN location AS loc ON loc.locationid = an.locationid LEFT JOIN region as reg ON loc.regionid = reg.regionid;
  
+
+SELECT pa.pathname,pa.artifacts,civ.civilizationname,civ.goldenage,kp.knownperson,loc.location,reg.region FROM paths AS pa LEFT JOIN civilization AS civ ON pa.civid = civ.civid LEFT JOIN famousperson as kp ON kp.knownpersonid=civ.knownpersonid LEFT JOIN location as loc ON loc.locationid = pa.locationid LEFT JOIN region as reg ON reg.regionid = loc.regionid;

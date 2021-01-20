@@ -5,6 +5,7 @@ from wtforms.fields.simple import FileField
 from wtforms.validators import InputRequired,  Length, EqualTo, Email, ValidationError
 from models import User, Contributor
 from passlib.hash import pbkdf2_sha256
+from remade_model import *
 
 
 """ def invalid_credentials(form, field):
