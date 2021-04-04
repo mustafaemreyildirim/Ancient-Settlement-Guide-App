@@ -56,7 +56,7 @@ def register():
         user.insert()
 
         #user = User(username=username, password=hashed_pw, name=name, surname=surname,email=email,createdate=createdate,prfimg=prfimg)
-        #db.session.add(user)
+        #db.session.add(user) 
         #db.session.commit()
         return redirect(url_for('login'))
 
